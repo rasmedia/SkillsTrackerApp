@@ -1,0 +1,3 @@
+INDEX VERSION 1.131+D:\coding\h2-database-operations-web-app\skillstracker\.metadata\.plugins\org.eclipse.jdt.core
+2722533382.index
+460998697.index
