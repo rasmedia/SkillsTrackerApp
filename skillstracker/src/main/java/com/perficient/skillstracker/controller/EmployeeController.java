@@ -56,6 +56,20 @@ public class EmployeeController
 		
 		return "add-edit-employee";
 	}
+	@RequestMapping(path = {"/details", "/details/{id}"})
+	public String detailsEmployeeById(Model model, @PathVariable("id") Optional<Long> id) throws NoDataFound
+	{
+		System.out.println("detailsByEmployeeId" +id);
+		if (id.isPresent()) {
+			Employee entity = service.getEmployeeById(id.get());
+			model.addAttribute("employee", entity);
+		} else {
+			model.addAttribute("employee", new Employee());
+		}
+		return "employee-details";
+		
+	}
+			
 	
 	@RequestMapping(path = "/delete/{id}")
 	public String deleteEmployeeById(Model model, @PathVariable("id") Long id) 
