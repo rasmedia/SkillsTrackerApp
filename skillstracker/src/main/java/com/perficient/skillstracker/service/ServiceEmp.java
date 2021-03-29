@@ -65,11 +65,25 @@ public class ServiceEmp {
 			if(employee.isPresent()) 
 			{
 				Employee newEntity = employee.get();
-				newEntity.setEmail(entity.getEmail());
 				newEntity.setFirstName(entity.getFirstName());
 				newEntity.setLastName(entity.getLastName());
-				newEntity.setAddress(entity.getAddress());
-
+				newEntity.setStreet(entity.getStreet());
+				newEntity.setSuite(entity.getSuite());
+				newEntity.setCity(entity.getCity());
+				newEntity.setRegion(entity.getRegion());
+				newEntity.setPostal(entity.getPostal());
+				newEntity.setCountry(entity.getCountry());
+				newEntity.setContactEmail(entity.getContactEmail());
+				newEntity.setCompanyEmail(entity.getCompanyEmail());
+				newEntity.setBirthDate(entity.getBirthDate());
+				newEntity.setHireDate(entity.getHireDate());
+				newEntity.setRole(entity.getRole());
+				newEntity.setBusinessUnit(entity.getBusinessUnit());
+				newEntity.setFieldName(entity.getFieldName());
+				newEntity.setFieldType(entity.getFieldType());
+				newEntity.setExperience(entity.getExperience());
+				newEntity.setSummary(entity.getSummary());
+				
 				newEntity = repository.save(newEntity);
 				
 				return newEntity;
