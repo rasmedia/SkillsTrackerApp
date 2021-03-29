@@ -1,10 +1,10 @@
-package com.h2.db;
+package com.perficient.skillstracker;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class H2DatabaseApplicationTests {
+class SkillstrackerApplicationTests {
 
 	@Test
 	void contextLoads() {

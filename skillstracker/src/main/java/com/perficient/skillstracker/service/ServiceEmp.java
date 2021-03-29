@@ -1,8 +1,5 @@
 package com.perficient.skillstracker.service;
 
-
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,56 +11,46 @@ import com.perficient.skillstracker.exception.NoDataFound;
 import com.perficient.skillstracker.model.Employee;
 import com.perficient.skillstracker.repository.EmployeeRepo;
 
-
-
 @Service
 public class ServiceEmp {
-	
+
 	@Autowired
 	EmployeeRepo repository;
-	
-	public List<Employee> getAllEmployees()
-	{
+
+	public List<Employee> getAllEmployees() {
 		System.out.println("getAllEmployees");
 		List<Employee> result = (List<Employee>) repository.findAll();
-		
-		if(result.size() > 0) {
+
+		if (result.size() > 0) {
 			return result;
 		} else {
 			return new ArrayList<Employee>();
 		}
 	}
 
-	
-	public Employee getEmployeeById(Long id) throws NoDataFound 
-	{
+	public Employee getEmployeeById(Long id) throws NoDataFound {
 		System.out.println("getEmployeeById");
 		Optional<Employee> employee = repository.findById(id);
-		
-		if(employee.isPresent()) {
+
+		if (employee.isPresent()) {
 			return employee.get();
 		} else {
 			throw new NoDataFound("No employee record exist for given id");
 		}
 	}
-	
-	public Employee createOrUpdateEmployee(Employee entity) 
-	{
+
+	public Employee createOrUpdateEmployee(Employee entity) {
 		System.out.println("createOrUpdateEmployee");
-		// Create new entry 
-		if(entity.getId()  == null) 
-		{
+		// Create new entry
+		if (entity.getId() == null) {
 			entity = repository.save(entity);
-			
+
 			return entity;
-		} 
-		else 
-		{
-			// update existing entry 
+		} else {
+			// update existing entry
 			Optional<Employee> employee = repository.findById(entity.getId());
-			
-			if(employee.isPresent()) 
-			{
+
+			if (employee.isPresent()) {
 				Employee newEntity = employee.get();
 				newEntity.setFirstName(entity.getFirstName());
 				newEntity.setLastName(entity.getLastName());
@@ -83,29 +70,27 @@ public class ServiceEmp {
 				newEntity.setFieldType(entity.getFieldType());
 				newEntity.setExperience(entity.getExperience());
 				newEntity.setSummary(entity.getSummary());
-				
+
 				newEntity = repository.save(newEntity);
-				
+
 				return newEntity;
 			} else {
 				entity = repository.save(entity);
-				
+
 				return entity;
 			}
 		}
-	} 
-	
-	public void deleteEmployeeById(Long id) throws NoDataFound 
-	{
+	}
+
+	public void deleteEmployeeById(Long id) throws NoDataFound {
 		System.out.println("deleteEmployeeById");
-		
+
 		Optional<Employee> employee = repository.findById(id);
-		
-		if(employee.isPresent()) 
-		{
+
+		if (employee.isPresent()) {
 			repository.deleteById(id);
 		} else {
 			throw new NoDataFound("No employee record exist for given id");
 		}
-	} 
+	}
 }

@@ -1,7 +1,5 @@
 package com.perficient.skillstracker.controller;
 
-
-
 import java.util.List;
 import java.util.Optional;
 
@@ -15,36 +13,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.perficient.skillstracker.exception.NoDataFound;
 import com.perficient.skillstracker.model.Employee;
 
-
 import com.perficient.skillstracker.service.ServiceEmp;
 
 @Controller
 @RequestMapping("/")
-public class EmployeeController 
-{
+public class EmployeeController {
 	@Autowired
 	ServiceEmp service;
 
 	@RequestMapping
-	public String getAllEmployees(Model model) 
-	{	
+	public String getAllEmployees(Model model) {
 		System.out.println("getAllEmployees");
-		
+
 		List<Employee> list = service.getAllEmployees();
 
 		model.addAttribute("employees", list);
-		
+
 		return "list-employees";
 	}
 
-	
-	
-	
-	@RequestMapping(path = {"/edit", "/edit/{id}"})
-	public String editEmployeeById(Model model, @PathVariable("id") Optional<Long> id) 
-							throws NoDataFound  
-	{
-		
+	@RequestMapping(path = { "/edit", "/edit/{id}" })
+	public String editEmployeeById(Model model, @PathVariable("id") Optional<Long> id) throws NoDataFound {
+
 		System.out.println("editEmployeeById" + id);
 		if (id.isPresent()) {
 			Employee entity = service.getEmployeeById(id.get());
@@ -52,14 +42,13 @@ public class EmployeeController
 		} else {
 			model.addAttribute("employee", new Employee());
 		}
-		
-		
+
 		return "add-edit-employee";
 	}
-	@RequestMapping(path = {"/details", "/details/{id}"})
-	public String detailsEmployeeById(Model model, @PathVariable("id") Optional<Long> id) throws NoDataFound
-	{
-		System.out.println("detailsByEmployeeId" +id);
+
+	@RequestMapping(path = { "/details", "/details/{id}" })
+	public String detailsEmployeeById(Model model, @PathVariable("id") Optional<Long> id) throws NoDataFound {
+		System.out.println("detailsByEmployeeId" + id);
 		if (id.isPresent()) {
 			Employee entity = service.getEmployeeById(id.get());
 			model.addAttribute("employee", entity);
@@ -67,28 +56,24 @@ public class EmployeeController
 			model.addAttribute("employee", new Employee());
 		}
 		return "employee-details";
-		
+
 	}
-			
-	
+
 	@RequestMapping(path = "/delete/{id}")
-	public String deleteEmployeeById(Model model, @PathVariable("id") Long id) 
-							throws NoDataFound 
-	{
-		
+	public String deleteEmployeeById(Model model, @PathVariable("id") Long id) throws NoDataFound {
+
 		System.out.println("deleteEmployeeById" + id);
-		
+
 		service.deleteEmployeeById(id);
 		return "redirect:/";
 	}
 
 	@RequestMapping(path = "/createEmployee", method = RequestMethod.POST)
-	public String createOrUpdateEmployee(Employee employee) 
-	{
+	public String createOrUpdateEmployee(Employee employee) {
 		System.out.println("createOrUpdateEmployee ");
-		
+
 		service.createOrUpdateEmployee(employee);
-		
+
 		return "redirect:/";
 	}
 }

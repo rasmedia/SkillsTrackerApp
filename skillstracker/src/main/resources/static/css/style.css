@@ -1,20 +1,9 @@
 @charset "ISO-8859-1";
 
-
-h6 {
-	display: inline flex;
+h6{
+	display: inline;
 }
 
 p{
-	display: inline flex;
-	
-}
-h3{
-	color: red;
-	
-}
-
-.form-group {
-  border: 2px solid powderblue;
-  margin: 50px;
+	display: inline;
 }
